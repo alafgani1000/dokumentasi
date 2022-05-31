@@ -24,10 +24,10 @@ class UserRegistered extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
+    // public function __construct(User $user)
+    // {
+    //     $this->user = $user;
+    // }
 
     /**
      * Build the message.
@@ -36,8 +36,7 @@ class UserRegistered extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.verification')->with([
-
-        ]);
+        return $this->subject('Test email')
+            ->view('emails.verification');
     }
 }
