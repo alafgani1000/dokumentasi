@@ -19,3 +19,11 @@ Route::get('/', function () {
 });
 Route::get('/register', [UserController::class, 'formRegister'])
     ->name('register');
+Route::post('/register',[UserController::class, 'register'])
+    ->name('register');
+
+Route::get('/email/verify?signature={code}&token={token}',[UserController::class, 'verification'])->name('link.verify');
+Route::get('/email/verify',[UserController::class, 'verification'])->name('email.verify');
+Route::get('hello', function() {
+    Tools::hello();
+});
