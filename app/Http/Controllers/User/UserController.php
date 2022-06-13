@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Notifications\EmailVerification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Throwable;
@@ -15,11 +16,22 @@ use Tools;
 
 class UserController extends Controller
 {
+    /**
+     * show the form for register user
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function formRegister()
     {
         return view('registers.register');
     }
 
+    /**
+     * store new user and send verification email
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function register(RegisterRequest $request)
     {
         try {
@@ -43,6 +55,12 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * verification email
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function verification(Request $request)
     {
         try {
@@ -57,5 +75,46 @@ class UserController extends Controller
         } catch (Throwable $th) {
             Log::info($th->getMessage());
         }
+    }
+
+    /**
+     * show the form for login user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function formLogin()
+    {
+        return view('authentication.login');
+    }
+
+    /**
+     * login user
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required','email'],
+            'password' => ['required']
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('home');
+        }
+
+        return back()->withErrors([
+            'not_match' => 'The provided credentials do not match our records.',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

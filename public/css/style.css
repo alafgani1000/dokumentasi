@@ -1,3 +1,89 @@
+body {
+    background-color: white !important;
+    margin: 0 auto;
+    padding: 0;
+}
 .was-validated {
     display: block;
+}
+.login {
+    background-color: #06113c;
+    border-radius: 5px 5px 5px 5px;
+}
+.button-login {
+    background-color: #ffa500;
+}
+.border-top-white {
+    border-top: 1px solid white;
+}
+.border-top-register {
+    border-top: 1px solid #dddddd;
+}
+.login-background {
+    background-image: url("/images/loginbg.jpg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+}
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-60%);
+    transform: translateY(-60%);
+}
+.register-logo {
+    margin-top: 60px;
+    margin-bottom: 10px;
+    font-weight: bolder;
+}
+.register {
+    background-color: #06113c;
+    border-radius: 5px 5px 5px 5px;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+@media only screen {
+    .footer {
+        position: fixed;
+        bottom: 0;
+        height: 300px;
+        width: 100%;
+        background-image: url("/images/wave.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .footer {
+        position: fixed;
+        bottom: 0;
+        height: 150px;
+        width: 100%;
+        background-image: url("/images/wave.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .footer {
+        position: fixed;
+        bottom: 0;
+        height: 150px;
+        width: 100%;
+        background-image: url("/images/wave.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .footer {
+        position: fixed;
+        bottom: 0;
+        height: 100px;
+        width: 100%;
+        background-image: url("/images/wave.svg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 }

@@ -17,18 +17,35 @@ class Tool
         echo "Hello world";
     }
 
+    /**
+     * generate random integer code
+     *
+     * @return $code
+     */
     public function generateCode()
     {
         $code = random_int(1000000000,9999999999);
         return $code;
     }
 
+    /**
+     * generate random string
+     *
+     * @param $length
+     * @return $token
+     */
     public function generateToken($length)
     {
         $token = Str::random($length);
         return $token;
     }
 
+    /**
+     * create a link and save it in the link table
+     *
+     * @param $userId
+     * @return $data
+     */
     public function createLink($userId)
     {
         try {
@@ -56,6 +73,14 @@ class Tool
         }
     }
 
+    /**
+     * check signature and token in the link table
+     * update status in the link table
+     * update email_verified_at in the user table
+     *
+     * @param $signature, $token
+     * @return $data
+     */
     public function emailVerify($signature, $token)
     {
         try {

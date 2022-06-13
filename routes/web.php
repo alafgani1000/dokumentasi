@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,13 +18,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//  register
 Route::get('/register', [UserController::class, 'formRegister'])
     ->name('register');
 Route::post('/register',[UserController::class, 'register'])
     ->name('register');
+Route::get('/email/verify?signature={code}&token={token}',[UserController::class, 'verification'])
+    ->name('link.verify');
+Route::get('/email/verify',[UserController::class, 'verification'])
+    ->name('email.verify');
+// authentication
+Route::get('/login', [UserController::class, 'formLogin'])
+    ->name('login');
+Route::post('/login', [UserController::class, 'login'])
+    ->name('login');
 
-Route::get('/email/verify?signature={code}&token={token}',[UserController::class, 'verification'])->name('link.verify');
-Route::get('/email/verify',[UserController::class, 'verification'])->name('email.verify');
-Route::get('hello', function() {
-    Tools::hello();
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [HomeController::class, 'home'])
+        ->name('home');
+    Route::post('/logout', [UserController::class, 'logout'])
+        ->name('logout');
 });
