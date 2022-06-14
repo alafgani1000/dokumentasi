@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DriveController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +40,14 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('home');
     Route::post('/logout', [UserController::class, 'logout'])
         ->name('logout');
+    // drive controller
+    Route::controller(DriveController::class)->group(function () {
+        Route::get('/drive','index')
+            ->name('drive');
+    });
+    // file controller
+    Route::controller(FileController::class)->group(function () {
+        Route::get('/file/{id}/{name}/','index')
+            ->name('file');
+    });
 });
