@@ -10,4 +10,9 @@ class FileController extends Controller
     {
         return view('files.index');
     }
+
+    public function link()
+    {
+        return view('links.index');
+    }
 }

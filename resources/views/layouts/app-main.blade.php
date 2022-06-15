@@ -38,9 +38,12 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-hdd-fill text-primary-color"></i> My Drive</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-link text-primary-color"></i></i> Links</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle text-primary-color ms-2"></i>{{ Auth::user()->name }}
+                                <i class="bi bi-person-circle text-primary-color me-1"></i>{{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li>
