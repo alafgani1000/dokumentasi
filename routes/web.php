@@ -49,5 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(FileController::class)->group(function () {
         Route::get('/file/{id}/{name}/','index')
             ->name('file');
+        Route::get('/link','link')
+            ->name('link');
     });
 });

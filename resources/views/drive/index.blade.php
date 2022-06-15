@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="container" id="main-content">
-        <h5>My Drive</h5>
+        <div class="row">
+            <div class="col-12">
+                <h5 class="ms-auto">My Drive</h5>
+            </div>
+        </div>
         <div id="content">
             <div class="box w-100">
                 <x-folder-row

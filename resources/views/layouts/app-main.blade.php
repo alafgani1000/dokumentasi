@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
                             <a class="nav-link" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-hdd-fill text-primary-color"></i> My Drive</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-link text-primary-color"></i></i> Links</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('link') }}"> <i class="bi bi-link text-primary-color"></i> Links</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -69,7 +69,7 @@
             @yield('content')
         </main>
         @yield('script')
-        <footer class="container">
+        <footer class="container mt-2">
             &copy;Dokumentasi {{ date('Y') }}
         </footer>
     </body>
