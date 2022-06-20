@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DriveController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
@@ -44,6 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(DriveController::class)->group(function () {
         Route::get('/drive','index')
             ->name('drive');
+        Route::get('/search','search')
+            ->name('drive.search');
     });
     // file controller
     Route::controller(FileController::class)->group(function () {
@@ -51,5 +54,10 @@ Route::group(['middleware' => 'auth'], function () {
             ->name('file');
         Route::get('/link','link')
             ->name('link');
+    });
+    // category controller
+    Route::controller(CategoryController::class)->group(function () {
+        Route::post('/category','store')
+            ->name('category');
     });
 });

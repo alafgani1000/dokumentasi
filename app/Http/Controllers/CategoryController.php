@@ -17,25 +17,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'category' => 'required|unique:categories,name'
         ]);
 
         Category::create([
             'user_id' => Auth::user()->id,
-            'name' => $request->name
+            'name' => $request->category
         ]);
 
         return response('Category Created');
-    }
-
-    /**
-     * show form create category
-     *
-     * @return Illuminate\Http\Response
-     */
-    public function formCreate()
-    {
-        return view('category.create');
     }
 
 }

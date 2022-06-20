@@ -11,14 +11,14 @@ class FormModal extends Component
      *
      * @var string
      */
-    public $id_modal;
+    public $idModal;
 
     /**
      * the id form
      *
      * @var string
      */
-    public $id_form;
+    public $idForm;
 
     /**
      * the action form
@@ -39,28 +39,20 @@ class FormModal extends Component
      *
      * @var string
      */
-    public $title;
-
-    /**
-     * the message alert
-     *
-     * @var string
-     */
-    public $message;
+    public $modalTitle;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id_modal, $id_form, $action, $method, $title, $message)
+    public function __construct($idModal, $idForm, $action, $method, $modalTitle)
     {
-        $this->id_modal = $id_modal;
-        $this->id_form = $id_form;
+        $this->idModal = $idModal;
+        $this->idForm = $idForm;
         $this->action = $action;
         $this->method = $method;
-        $this->$title = $title;
-        $this->message = $message;
+        $this->modalTitle = $modalTitle;
     }
 
     /**

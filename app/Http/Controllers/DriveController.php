@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class DriveController extends Controller
@@ -13,6 +14,18 @@ class DriveController extends Controller
      */
     public function index()
     {
-        return view('drive.index');
+        $categories = Category::paginate(5);
+        return view('drive.index', compact('categories'));
+    }
+
+    /**
+     * show data searching
+     *
+     * @return Illuminae\Http\Response
+     */
+    public function search(Request $req)
+    {
+        $categories = Category::where('name','like','%'.$req->search.'%')->paginate(5);
+        return view('drive.search', compact('categories'));
     }
 }

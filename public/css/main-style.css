@@ -14,17 +14,18 @@ body {
 }
 
 .box {
-    border: 1px solid #e8e8e8;
+    border: 1px solid #f7f3f3;
     border-radius: 5px 5px 5px 5px;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    box-shadow: 2px 1px 2px 2px #f7f3f3;
 }
 
 .box-row {
-    border-top: 1px solid #e8e8e8;
-    border-bottom: 1px solid #e8e8e8;
+    border-top: 1px dashed #e8e8e8;
+    border-bottom: 1px dashed #e8e8e8;
     padding-top: 10px;
     padding-top: 10px;
     margin-bottom: 10px;
@@ -32,4 +33,9 @@ body {
 
 .link-folder {
     font-style: normal;
+}
+
+.shadow-btn {
+    box-shadow: 2px 1px 2px 2px #f7f3f3;
+    border-radius: 3px 3px 3px 3px;
 }

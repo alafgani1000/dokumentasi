@@ -5,19 +5,16 @@
         <div class="row mb-2">
             <div class="col-12">
                 <h5 class="float-start">My Drive</h5>
-                <div class="float-end">
-                    <div class="btn-group shadow-btn float-end">
-                        <button class="btn btn-light btn-sm new-directory"><i class="bi bi-folder-plus text-warning "></i> New</button>
-                    </div>
-
-                    <div class="row g-4 float-end me-1">
-                        <div class="col">
-                            <div class="input-group">
-                                <form method="GET" id="category_search" action="{{ route('drive.search') }}">
-                                    <input type="text" class="form-control form-control-sm" name="search">
-                                </form>
-                                <button class="btn btn-sm btn-outline-secondary" type="submit" form="category_search"><i class="bi bi-search"></i></button>
-                            </div>
+                <div class="float-end btn-group shadow-btn float-end">
+                    <button class="btn btn-light btn-sm new-directory"><i class="bi bi-folder-plus text-warning "></i> New</button>
+                </div>
+                <div class="row g-4 float-end me-1">
+                    <div class="col">
+                        <div class="input-group">
+                            <form method="GET" id="category_search" action="{{ route('drive.search') }}">
+                                <input type="text" class="form-control form-control-sm" name="search">
+                            </form>
+                            <button class="btn btn-sm btn-outline-secondary" type="submit" form="category_search"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
                 </div>
