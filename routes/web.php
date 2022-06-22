@@ -59,5 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::post('/category','store')
             ->name('category');
+        Route::delete('/category/{id}/delete', 'delete')
+            ->name('category.delete');
+        Route::get('/category/{id}/edit', 'edit')
+            ->name('category.edit');
+        Route::put('/category/{id}/rename', 'rename')
+            ->name('category.rename');
     });
 });

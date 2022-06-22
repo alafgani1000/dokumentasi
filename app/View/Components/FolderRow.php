@@ -49,11 +49,18 @@ class FolderRow extends Component
     public $dataLink;
 
     /**
+     * the action class
+     *
+     * @var string
+     */
+    public $actionClass;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $size, $author, $lastDate, $dataId, $dataLink)
+    public function __construct($name, $size, $author, $lastDate, $dataId, $dataLink, $actionClass)
     {
         $this->name = $name;
         $this->size = $size;
@@ -61,6 +68,7 @@ class FolderRow extends Component
         $this->lastDate = $lastDate;
         $this->dataId = $dataId;
         $this->dataLink = $dataLink;
+        $this->actionClass = $actionClass;
     }
 
     /**

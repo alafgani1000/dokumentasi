@@ -30,9 +30,10 @@
                         name="{{ $category->name }}"
                         size="200 Kb"
                         author="Saya"
-                        lastDate="2022-02-11"
-                        dataId="1"
+                        lastDate="{{ date('Y-m-d',strtotime($category->created_at)) }}"
+                        dataId="{{ $category->id }}"
                         dataLink="http://localhost:8000/file/1/Panduan Penggunaan Aplikasi HRIS"
+                        actionClass="category"
                     ></x-folder-row>
                 @endforeach
             </div>
@@ -44,9 +45,23 @@
             idForm="form_create_category"
             action="{{ route('category') }}"
             method="POST"
-            modalTitle="Create Category"
-        >
+            modalTitle="Create Category">
            <input class="form-control" name="category" id="category" />
+        </x-form-modal>
+
+        <x-confirm
+            modalId="confirm_del_category"
+            btnId="delete_category"
+            message="Are you sure ?, the file will also be deleted">
+        </x-confirm>
+
+        <x-form-modal
+            idModal="mc_rename_category"
+            idForm="form_rename_category"
+            action=""
+            method="PUT"
+            modalTitle="Rename Category">
+            <input class="form-control" name="name" id="name" />
         </x-form-modal>
     </div>
 @endsection
@@ -64,21 +79,95 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             });
+
             /**
              * defined modal create category
+             *
              */
             var createDirModal = new bootstrap.Modal(document.getElementById('mc_category'), {
                 keyboard: false
             });
+
+            /**
+             * defined modal delete confirmation
+             *
+             */
+            var deleteConfirmModal = new bootstrap.Modal(document.getElementById('confirm_del_category'), {
+                keyboard: false
+            });
+
+            /**
+             * defined modal rename category
+             *
+             */
+            var renameModal = new bootstrap.Modal(document.getElementById('mc_rename_category'), {
+                keyboard: false
+            });
+
             /**
              * show modal create category
+             *
              */
-            $('.new-directory').on('click', function() {
+            $('.new-directory').on('click', function(event) {
                 createDirModal.show();
             });
 
             /**
+             * show modal rename
+             *
+             */
+            $('.rename-category').on('click', function(event) {
+                const id = $(this).attr("dataid");
+                let url = '{{ route("category.edit", ":id") }}';
+                url = url.replace(':id',id);
+                let urlRename = '{{ route("category.rename", ":id") }}';
+                urlRename = urlRename.replace(':id',id);
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: {}
+                }).done(function (res) {
+                    $('#form_rename_category').attr('action',urlRename);
+                    $('#name').val(res.name);
+                    renameModal.show();
+                }).fail(function (res) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: res
+                    });
+                });
+
+            })
+
+            /**
+             * rename submit
+             *
+             */
+            $('#form_rename_category').on('submit', function (event) {
+                event.preventDefault();
+                const data = $(this).serialize();
+                const url = $(this).attr('action');
+                $.ajax({
+                    type: "PUT",
+                    url: url,
+                    data: data,
+                }).done(function (res) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: res
+                    });
+                    location.reload();
+                }).fail(function (res) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: res
+                    });
+                });
+            })
+
+            /**
              * submit create category
+             *
              */
             $('#form_create_category').on('submit', function (event) {
                 event.preventDefault();
@@ -98,6 +187,32 @@
                     Toast.fire({
                         icon: 'error',
                         title: 'Error'
+                    });
+                });
+            });
+
+            /**
+             * delete category
+             *
+             */
+            $('.delete-category').on('click', function (event) {
+                const id = $(this).attr('dataid');
+                let url = "{{ route('category.delete', ':id') }}";
+                url = url.replace(':id', id);
+                $.ajax({
+                    type: "DELETE",
+                    url: url,
+                    data: {},
+                }).done(function (res) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: res
+                    });
+                    location.reload();
+                }).fail(function (res) {
+                    Toast.fire({
+                        icon: 'error',
+                        title: res
                     });
                 });
             })

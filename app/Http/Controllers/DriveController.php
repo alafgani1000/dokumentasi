@@ -19,6 +19,17 @@ class DriveController extends Controller
     }
 
     /**
+     * show data
+     *
+     * @return Illumintate\Http\Response
+     */
+    public function data()
+    {
+        $categories = Category::paginate(5);
+        return view('drive.data', compact('categories'));
+    }
+
+    /**
      * show data searching
      *
      * @return Illuminae\Http\Response
