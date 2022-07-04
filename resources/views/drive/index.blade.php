@@ -28,11 +28,11 @@
                 @foreach ($categories as $category)
                     <x-folder-row
                         name="{{ $category->name }}"
-                        size="200 Kb"
+                        size="{{ $category->files()->count() }}"
                         author="Saya"
                         lastDate="{{ date('Y-m-d',strtotime($category->created_at)) }}"
                         dataId="{{ $category->id }}"
-                        dataLink="http://localhost:8000/file/1/Panduan Penggunaan Aplikasi HRIS"
+                        dataLink="{{ route('file', [$category->id,$category->name]) }}"
                         actionClass="category"
                     ></x-folder-row>
                 @endforeach
@@ -151,11 +151,10 @@
                     type: "PUT",
                     url: url,
                     data: data,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
                 }).done(function (res) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: res
-                    });
                     location.reload();
                 }).fail(function (res) {
                     Toast.fire({
@@ -178,11 +177,9 @@
                     url: route,
                     data: data
                 }).done(function (response) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: response
-                    });
+
                     createDirModal.hide();
+                    location.reload();
                 }).fail(function (response) {
                     Toast.fire({
                         icon: 'error',
@@ -196,25 +193,35 @@
              *
              */
             $('.delete-category').on('click', function (event) {
-                const id = $(this).attr('dataid');
-                let url = "{{ route('category.delete', ':id') }}";
-                url = url.replace(':id', id);
-                $.ajax({
-                    type: "DELETE",
-                    url: url,
-                    data: {},
-                }).done(function (res) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: res
-                    });
-                    location.reload();
-                }).fail(function (res) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: res
-                    });
-                });
+                Swal.fire({
+                    title: 'Are you sure?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Delete',
+                    preConfirm: () => {
+                        const id = $(this).attr('dataid');
+                        let url = "{{ route('category.delete', ':id') }}";
+                        url = url.replace(':id', id);
+                        $.ajax({
+                            type: "DELETE",
+                            url: url,
+                            data: {},
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        }).done(function (res) {
+                            location.reload();
+                        }).fail(function (res) {
+                            Toast.fire({
+                                icon: 'error',
+                                title: res
+                            });
+                        });
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                })
             })
         });
     </script>

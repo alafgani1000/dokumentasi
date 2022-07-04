@@ -14,7 +14,7 @@ class DriveController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::paginate(10);
         return view('drive.index', compact('categories'));
     }
 
@@ -25,7 +25,7 @@ class DriveController extends Controller
      */
     public function data()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::paginate(10);
         return view('drive.data', compact('categories'));
     }
 

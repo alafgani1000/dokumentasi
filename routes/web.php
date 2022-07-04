@@ -37,33 +37,35 @@ Route::post('/login', [UserController::class, 'login'])
     ->name('login');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', [HomeController::class, 'home'])
-        ->name('home');
-    Route::post('/logout', [UserController::class, 'logout'])
-        ->name('logout');
-    // drive controller
-    Route::controller(DriveController::class)->group(function () {
-        Route::get('/drive','index')
-            ->name('drive');
-        Route::get('/search','search')
-            ->name('drive.search');
-    });
-    // file controller
-    Route::controller(FileController::class)->group(function () {
-        Route::get('/file/{id}/{name}/','index')
-            ->name('file');
-        Route::get('/link','link')
-            ->name('link');
-    });
-    // category controller
-    Route::controller(CategoryController::class)->group(function () {
-        Route::post('/category','store')
-            ->name('category');
-        Route::delete('/category/{id}/delete', 'delete')
-            ->name('category.delete');
-        Route::get('/category/{id}/edit', 'edit')
-            ->name('category.edit');
-        Route::put('/category/{id}/rename', 'rename')
-            ->name('category.rename');
+    Route::group(['middleware' => ['verified']], function() {
+        Route::get('/home', [HomeController::class, 'home'])
+            ->name('home');
+        Route::post('/logout', [UserController::class, 'logout'])
+            ->name('logout');
+        // drive controller
+        Route::controller(DriveController::class)->group(function () {
+            Route::get('/drive','index')
+                ->name('drive');
+            Route::get('/search','search')
+                ->name('drive.search');
+        });
+        // file controller
+        Route::controller(FileController::class)->group(function () {
+            Route::get('/file/{id}/{name}/','index')
+                ->name('file');
+            Route::get('/link','link')
+                ->name('link');
+        });
+        // category controller
+        Route::controller(CategoryController::class)->group(function () {
+            Route::post('/category','store')
+                ->name('category');
+            Route::delete('/category/{id}/delete', 'delete')
+                ->name('category.delete');
+            Route::get('/category/{id}/edit', 'edit')
+                ->name('category.edit');
+            Route::put('/category/{id}/rename', 'rename')
+                ->name('category.rename');
+        });
     });
 });
