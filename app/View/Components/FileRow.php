@@ -67,7 +67,7 @@ class FileRow extends Component
      *
      * @return void
      */
-    public function __construct($name, $size, $author, $update_date, $data_id, $data_link, $icon)
+    public function __construct($name, $size, $author, $update_date, $data_id, $data_link, $icon, $action_class)
     {
         $this->name = $name;
         $this->size = $size;
@@ -76,6 +76,7 @@ class FileRow extends Component
         $this->data_id = $data_id;
         $this->data_link = $data_link;
         $this->icon = $icon;
+        $this->action_class = $action_class;
     }
 
     /**
