@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function () {
                 ->name('file');
             Route::get('/link','link')
                 ->name('link');
+            Route::post('file/upload','store')
+                ->name('file.upload');
         });
         // category controller
         Route::controller(CategoryController::class)->group(function () {

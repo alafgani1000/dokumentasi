@@ -61,4 +61,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->attributes['email_verify_expire_at'] = $value->addHours(24);
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

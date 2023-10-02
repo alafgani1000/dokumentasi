@@ -7,7 +7,7 @@
                 <h5 class="float-start">My Drive</h5>
                 <div class="float-end">
                     <div class="btn-group shadow-btn float-end">
-                        <button class="btn btn-light btn-sm new-directory"><i class="bi bi-folder-plus text-warning "></i> New</button>
+                        <button class="btn btn-primary btn-sm new-directory text-white"><i class="bi bi-folder-plus text-white me-1 fw-bold"></i> New</button>
                     </div>
 
                     <div class="row g-4 float-end me-1">
@@ -16,7 +16,7 @@
                                 <form method="GET" id="category_search" action="{{ route('drive.search') }}">
                                     <input type="text" class="form-control form-control-sm" name="search">
                                 </form>
-                                <button class="btn btn-sm btn-outline-secondary" type="submit" form="category_search"><i class="bi bi-search"></i></button>
+                                <button class="btn btn-sm btn-secondary" type="submit" form="category_search"><i class="bi bi-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -29,11 +29,14 @@
                     <x-folder-row
                         name="{{ $category->name }}"
                         size="{{ $category->files()->count() }}"
-                        author="Saya"
+                        author="{{ $category->user->name }}"
                         lastDate="{{ date('Y-m-d',strtotime($category->created_at)) }}"
                         dataId="{{ $category->id }}"
                         dataLink="{{ route('file', [$category->id,$category->name]) }}"
                         actionClass="category"
+                        dataEdit="{{ route('category.edit',$category->id) }}"
+                        dataUpdate="{{ route('category.rename',$category->id) }}"
+                        dataDelete="{{ route('category.delete',$category->id) }}"
                     ></x-folder-row>
                 @endforeach
             </div>
@@ -66,163 +69,5 @@
     </div>
 @endsection
 @section("script")
-    <script>
-        $(function() {
-            Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-            });
-
-            /**
-             * defined modal create category
-             *
-             */
-            var createDirModal = new bootstrap.Modal(document.getElementById('mc_category'), {
-                keyboard: false
-            });
-
-            /**
-             * defined modal delete confirmation
-             *
-             */
-            var deleteConfirmModal = new bootstrap.Modal(document.getElementById('confirm_del_category'), {
-                keyboard: false
-            });
-
-            /**
-             * defined modal rename category
-             *
-             */
-            var renameModal = new bootstrap.Modal(document.getElementById('mc_rename_category'), {
-                keyboard: false
-            });
-
-            /**
-             * show modal create category
-             *
-             */
-            $('.new-directory').on('click', function(event) {
-                createDirModal.show();
-            });
-
-            /**
-             * show modal rename
-             *
-             */
-            $('.rename-category').on('click', function(event) {
-                const id = $(this).attr("dataid");
-                let url = '{{ route("category.edit", ":id") }}';
-                url = url.replace(':id',id);
-                let urlRename = '{{ route("category.rename", ":id") }}';
-                urlRename = urlRename.replace(':id',id);
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    data: {}
-                }).done(function (res) {
-                    $('#form_rename_category').attr('action',urlRename);
-                    $('#name').val(res.name);
-                    renameModal.show();
-                }).fail(function (res) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: res
-                    });
-                });
-
-            })
-
-            /**
-             * rename submit
-             *
-             */
-            $('#form_rename_category').on('submit', function (event) {
-                event.preventDefault();
-                const data = $(this).serialize();
-                const url = $(this).attr('action');
-                $.ajax({
-                    type: "PUT",
-                    url: url,
-                    data: data,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                }).done(function (res) {
-                    location.reload();
-                }).fail(function (res) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: res
-                    });
-                });
-            })
-
-            /**
-             * submit create category
-             *
-             */
-            $('#form_create_category').on('submit', function (event) {
-                event.preventDefault();
-                const data = $(this).serialize()
-                const route = $(this).attr('action')
-                $.ajax({
-                    type: "POST",
-                    url: route,
-                    data: data
-                }).done(function (response) {
-
-                    createDirModal.hide();
-                    location.reload();
-                }).fail(function (response) {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Error'
-                    });
-                });
-            });
-
-            /**
-             * delete category
-             *
-             */
-            $('.delete-category').on('click', function (event) {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Delete',
-                    preConfirm: () => {
-                        const id = $(this).attr('dataid');
-                        let url = "{{ route('category.delete', ':id') }}";
-                        url = url.replace(':id', id);
-                        $.ajax({
-                            type: "DELETE",
-                            url: url,
-                            data: {},
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        }).done(function (res) {
-                            location.reload();
-                        }).fail(function (res) {
-                            Toast.fire({
-                                icon: 'error',
-                                title: res
-                            });
-                        });
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
-                })
-            })
-        });
-    </script>
+     <script src="{{ asset('js/drive.js') }}"></script>
 @endsection

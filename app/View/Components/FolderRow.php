@@ -49,6 +49,27 @@ class FolderRow extends Component
     public $dataLink;
 
     /**
+     * the link edit
+     *
+     * @var string
+     */
+    public $dataEdit;
+
+    /**
+     * the link update
+     *
+     * @var string
+     */
+    public $dataUpdate;
+
+    /**
+     * the link delete
+     *
+     * @var string
+     */
+    public $dataDelete;
+
+    /**
      * the action class
      *
      * @var string
@@ -60,7 +81,7 @@ class FolderRow extends Component
      *
      * @return void
      */
-    public function __construct($name, $size, $author, $lastDate, $dataId, $dataLink, $actionClass)
+    public function __construct($name, $size, $author, $lastDate, $dataId, $dataLink, $actionClass, $dataEdit, $dataUpdate, $dataDelete)
     {
         $this->name = $name;
         $this->size = $size;
@@ -69,6 +90,9 @@ class FolderRow extends Component
         $this->dataId = $dataId;
         $this->dataLink = $dataLink;
         $this->actionClass = $actionClass;
+        $this->dataEdit = $dataEdit;
+        $this->dataUpdate = $dataUpdate;
+        $this->dataDelete = $dataDelete;
     }
 
     /**

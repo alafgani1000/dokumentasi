@@ -16,12 +16,6 @@
         <link rel="stylesheet" href="{{ asset('css/main-style.css') }}" />
         <script src="{{ asset('js/app.js') }}"></script>
         <style>
-            body {
-                font-family: 'Nunito', sans-serif;
-            }
-            .logo {
-                margin-bottom: 0 !important;
-            }
         </style>
     </head>
     <body>
@@ -35,17 +29,17 @@
                     @auth
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="{{ route('home') }}" href=""> <i class="bi bi-house-fill text-primary-color"></i> Home</a>
+                            <a class="nav-link" aria-current="{{ route('home') }}" href=""> <i class="bi bi-house-fill"></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-hdd-fill text-primary-color"></i> My Drive</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-hdd-fill"></i> My Drive</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{ route('link') }}"> <i class="bi bi-link text-primary-color"></i> Links</a>
+                            <a class="nav-link" aria-current="page" href="{{ route('link') }}"> <i class="bi bi-link"></i> Links</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle text-primary-color me-1"></i>{{ Auth::user()->name }}
+                                <i class="bi bi-person-circle me-1"></i>{{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li>

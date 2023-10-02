@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string('file_name');
             $table->integer('size');
             $table->string('file_type');
-            $table->string('visibility');
+            $table->integer('visibility_id');
             $table->integer('user_id');
             $table->timestamps();
         });

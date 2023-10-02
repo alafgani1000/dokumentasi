@@ -78,5 +78,4 @@ class CategoryController extends Controller
         ]);
         return response('Rename Success');
     }
-
 }
