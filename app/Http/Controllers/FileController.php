@@ -76,4 +76,33 @@ class FileController extends Controller
         }
         return [round($size,2), $unit];
     }
+
+    /**
+     * read file
+     * @var id
+     */
+    public function readFIle($id, $name)
+    {
+        $file = File::find($id);
+        return response()->file(storage_path('app/'.$file->name));
+    }
+
+    /**
+     * delete file
+     */
+    public function delete($id)
+    {
+        $file = File::find($id);
+        if (!is_null($file)) {
+            Storage::delete('app/'.$file->file_name);
+            $file->delete();
+            return 'File deleted';
+        } else {
+            return 'File not found';
+        }
+    }
+
+    /**
+     *
+     */
 }

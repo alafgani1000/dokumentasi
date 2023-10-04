@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
                 ->name('link');
             Route::post('file/upload','store')
                 ->name('file.upload');
+            Route::get('show-file/{id}/{name}','readFile')
+                ->name('file.read');
         });
         // category controller
         Route::controller(CategoryController::class)->group(function () {

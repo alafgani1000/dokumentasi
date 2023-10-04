@@ -28,25 +28,11 @@ class FileRow extends Component
     public $author;
 
     /**
-     * the update date
-     *
-     * @var string
-     */
-    public $update_date;
-
-    /**
      * the id of data
      *
      * @var integer
      */
-    public $data_id;
-
-    /**
-     * the link of data
-     *
-     * @var string
-     */
-    public $data_link;
+    public $dataId;
 
     /**
      * the icon of file
@@ -60,23 +46,37 @@ class FileRow extends Component
      *
      * @var string
      */
-    public $action_class;
+    public $actionClass;
+
+    /**
+     * link read file
+     *
+     * @var string
+     */
+    public $linkRead;
+
+    /**
+     * created at
+     *
+     * @var string
+     */
+    public $createDate;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $size, $author, $update_date, $data_id, $data_link, $icon, $action_class)
+    public function __construct($name, $size, $author, $dataId, $icon, $actionClass, $linkRead, $createDate)
     {
         $this->name = $name;
         $this->size = $size;
         $this->author = $author;
-        $this->update_date = $update_date;
-        $this->data_id = $data_id;
-        $this->data_link = $data_link;
+        $this->dataId = $dataId;
         $this->icon = $icon;
-        $this->action_class = $action_class;
+        $this->actionClass = $actionClass;
+        $this->linkRead = $linkRead;
+        $this->createdDate = $createDate;
     }
 
     /**
