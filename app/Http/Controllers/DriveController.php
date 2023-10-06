@@ -12,10 +12,11 @@ class DriveController extends Controller
      *
      * @return Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $req)
     {
-        $categories = Category::paginate(10);
-        return view('drive.index', compact('categories'));
+        $search = $req->search;
+        $categories = Category::where('name','like','%'.$search.'%')->paginate(10)->onEachSide(1);
+        return view('drive.index', compact('categories', 'search'));
     }
 
     /**
@@ -25,7 +26,7 @@ class DriveController extends Controller
      */
     public function data()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(5);
         return view('drive.data', compact('categories'));
     }
 

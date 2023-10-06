@@ -13,10 +13,12 @@
                     <div class="row g-4 float-end me-1">
                         <div class="col">
                             <div class="input-group">
-                                <form method="GET" id="category_search" action="{{ route('drive.search') }}">
-                                    <input type="text" class="form-control form-control-sm" name="search">
+                                <form method="GET" id="file_search" action="{{ route('file', [$category->id, $category->name]) }}">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control form-control-sm" name="search" value="{{ $search }}">
+                                        <button class="btn btn-sm btn-secondary" type="submit"><i class="bi bi-search"></i></button>
+                                    </div>
                                 </form>
-                                <button class="btn btn-sm btn-primary" type="submit" form="category_search"><i class="bi bi-search"></i></button>
                             </div>
                         </div>
                     </div>
@@ -35,9 +37,12 @@
                         size="{{ $item->display_size }}"
                         author="{{ $item->display_author }}"
                         createDate="{{ $item->created_at }}"
+                        dataShare="test"
+                        dataDelete="{{ route('file.delete', $item->id) }}"
                     >
                     </x-file-row>
                 @endforeach
+                {{ $files->links() }}
             </div>
         </div>
         <x-form-modal

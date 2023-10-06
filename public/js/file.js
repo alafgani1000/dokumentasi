@@ -68,4 +68,42 @@ $(function () {
                 });
         }
     });
+
+    /**
+     * delete file
+     *
+     */
+    $(".delete-file").on("click", function (event) {
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Delete",
+            preConfirm: () => {
+                const url = $(this).attr("data-delete");
+                $.ajax({
+                    type: "DELETE",
+                    url: url,
+                    data: {},
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                })
+                    .done(function (res) {
+                        location.reload();
+                    })
+                    .fail(function (res) {
+                        Toast.fire({
+                            icon: "error",
+                            title: res,
+                        });
+                    });
+            },
+            allowOutsideClick: () => !Swal.isLoading(),
+        });
+    });
 });

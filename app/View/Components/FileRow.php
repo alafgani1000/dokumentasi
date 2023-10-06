@@ -63,11 +63,25 @@ class FileRow extends Component
     public $createDate;
 
     /**
+     * link delete
+     *
+     * @var string
+     */
+    public $dataDelete;
+
+    /**
+     *link share
+     *
+     * @var string
+     */
+    public $dataShare;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($name, $size, $author, $dataId, $icon, $actionClass, $linkRead, $createDate)
+    public function __construct($name, $size, $author, $dataId, $icon, $actionClass, $linkRead, $createDate, $dataDelete, $dataShare)
     {
         $this->name = $name;
         $this->size = $size;
@@ -76,7 +90,9 @@ class FileRow extends Component
         $this->icon = $icon;
         $this->actionClass = $actionClass;
         $this->linkRead = $linkRead;
-        $this->createdDate = $createDate;
+        $this->createDate = $createDate;
+        $this->dataDelete = $dataDelete;
+        $this->dataShare = $dataShare;
     }
 
     /**

@@ -15,13 +15,15 @@ class FileController extends Controller
      * show data file file
      *
      */
-    public function index($id)
+    public function index(Request $req, $id)
     {
         $category = Category::find($id);
+        $search = $req->search;
         $files = File::with('user')
+            ->where('file_name', 'like', '%'.$search.'%')
             ->where('category_id',$id)
-            ->get();
-        return view('files.index', compact('category', 'files'));
+            ->paginate(10)->onEachSide(1);
+        return view('files.index', compact('category', 'files', 'search'));
     }
 
     /**
@@ -94,8 +96,10 @@ class FileController extends Controller
     {
         $file = File::find($id);
         if (!is_null($file)) {
-            Storage::delete('app/'.$file->file_name);
-            $file->delete();
+            $delete = Storage::delete($file->name);
+            if ($delete) {
+                $file->delete();
+            }
             return 'File deleted';
         } else {
             return 'File not found';
@@ -103,6 +107,19 @@ class FileController extends Controller
     }
 
     /**
-     *
+     * create file link
      */
+    public function createLink()
+    {
+
+    }
+
+    /**
+     * file verification
+     * memverifikasi akses file
+     */
+    public function accessVerification()
+    {
+
+    }
 }

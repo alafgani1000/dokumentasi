@@ -46,8 +46,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::controller(DriveController::class)->group(function () {
             Route::get('/drive','index')
                 ->name('drive');
-            Route::get('/search','search')
-                ->name('drive.search');
         });
         // file controller
         Route::controller(FileController::class)->group(function () {
@@ -55,10 +53,14 @@ Route::group(['middleware' => 'auth'], function () {
                 ->name('file');
             Route::get('/link','link')
                 ->name('link');
-            Route::post('file/upload','store')
+            Route::post('/file/upload','store')
                 ->name('file.upload');
-            Route::get('show-file/{id}/{name}','readFile')
+            Route::get('/show-file/{id}/{name}','readFile')
                 ->name('file.read');
+            Route::delete('/file/{id}/delete','delete')
+                ->name('file.delete');
+            Route::get('/file/access?signature={code}&token={token}', 'accessVerification')
+                ->name('file.access-verify');
         });
         // category controller
         Route::controller(CategoryController::class)->group(function () {

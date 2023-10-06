@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Link;
 use App\Models\User;
+use App\Models\FileLink;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -119,4 +120,48 @@ class Tool
         }
 
     }
+
+    /**
+     * verifiy access file
+     *
+     *
+     */
+
+    /**
+     * create file link and save in to file link table
+     *
+     * @param $userId
+     * @return $data
+     */
+    public function createFileLink($userId, $password=NULL)
+    {
+        try {
+            $code =  $this->generateCode();
+            $token = $this->generateToken(60);
+            $key = $this->generateToken(60);
+            $link = route('file.access-verify',[$code,$token]);
+            $create = FileLink::create([
+                'user_id' => $userId,
+                'token' => $token,
+                'signature' => $code,
+                'url' => $link,
+                'status' => 1,
+                'key' => $key,
+                'password' => $password
+            ]);
+            if ($create) {
+                $data = new stdClass();
+                $data->message = 'Link Created';
+                $data->status = true;
+                $data->link = $link;
+                return $data;
+            } else {
+                return false;
+            }
+
+        } catch(\Throwable $th) {
+            Log::info($th->getMessage());
+        }
+    }
+
 }
