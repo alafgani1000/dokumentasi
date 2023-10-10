@@ -5,6 +5,7 @@ use App\Http\Controllers\DriveController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,8 +52,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::controller(FileController::class)->group(function () {
             Route::get('/file/{id}/{name}/','index')
                 ->name('file');
-            Route::get('/link','link')
-                ->name('link');
             Route::post('/file/upload','store')
                 ->name('file.upload');
             Route::get('/show-file/{id}/{name}','readFile')
@@ -61,6 +60,10 @@ Route::group(['middleware' => 'auth'], function () {
                 ->name('file.delete');
             Route::get('/file/access?signature={code}&token={token}', 'accessVerification')
                 ->name('file.access-verify');
+            Route::get('/file/access', 'accessVerification')
+                ->name('file.access');
+            Route::post('file/{id}/create-link', 'createLink')
+                ->name('file.create-link');
         });
         // category controller
         Route::controller(CategoryController::class)->group(function () {
@@ -72,6 +75,13 @@ Route::group(['middleware' => 'auth'], function () {
                 ->name('category.edit');
             Route::put('/category/{id}/rename', 'rename')
                 ->name('category.rename');
+        });
+        // route link
+        Route::controller(LinkController::class)->group(function () {
+            Route::get('/link','index')
+                ->name('link');
+            Route::delete('/link/{id}/delete', 'delete')
+                ->name('link.delete');
         });
     });
 });

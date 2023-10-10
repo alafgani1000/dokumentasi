@@ -5,22 +5,31 @@
         <h5><i class="bi bi-link-45deg text-primary-color"></i></i> Links</h5>
         <div id="content">
             <div class="box w-100">
-                <div class="row box-row">
-                    <div class="col-3 name-file">
-                        <i class="bi bi-three-dots me-2" data-bs-toggle="dropdown"></i>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-clipboard me-2"></i></i>Copy</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-share text-primary me-2"></i></i>Share to</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-trash3 text-danger me-2"></i>Delete</a></li>
-                        </ul>
-                        <i class="bi bi-file-word-fill text-primary"></i> Modul Personal Data</div>
-                    <div class="col-4 size">{{ Str::substr('http://localhost:8000/email/verify?signature=3157650778&token=ZcaaOuTfTAjMKrmhf6cBN8Tt2IornZn22imTrtvVDALNuP5iUxm5TuvYpoSB',0,44) }} ...</div>
-                    <div class="col-2 author">Saya</div>
-                    <div class="col-3 last-date">2022-06-14 08:00:00</div>
+                <div class="row box-row fw-bold">
+                    <div class="col-4 ps-4">Name</div>
+                    <div class="col-6">Link</div>
+                    <div class="col">Password</div>
                 </div>
+                @foreach ($filelinks as $item)
+                    <div class="row box-row">
+                        <div class="col-4 name-file">
+                            <i class="bi bi-three-dots me-2" data-bs-toggle="dropdown"></i>
+                            <ul class="dropdown-menu">
+                                <li class="delete-link" data-delete="{{ route('link.delete', $item->id) }}"><i class="bi bi-trash3 text-danger me-2 ms-2"></i>Delete</li>
+                            </ul>
+                            <i class="bi bi-file-pdf-fill text-danger"></i>
+                               {{ Str::substr($item->file->file_name, 0, 30) }}..pdf
+                        </div>
+                        <div class="col-6 size">{{ Str::substr($item->url,0,70) }} ... &nbsp;<i datalink="{{ $item->url }}" class="bi bi-clipboard me-2 data-copy"></i></div>
+                        <div class="col-2">{{ $item->password }}</div>
+                    </div>
+                @endforeach
+                {{ $filelinks->links() }}
             </div>
         </div>
     </div>
 @endsection
+@section("script")
+     <script src="{{ asset('js/link.js') }}"></script>
+@endsection
+

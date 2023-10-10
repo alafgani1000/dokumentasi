@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\FileLink;
 use Illuminate\Support\Facades\Auth;
 
 class File extends Model
@@ -22,6 +23,11 @@ class File extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function fileLinks()
+    {
+        return $this->hasMany(FileLink::class);
     }
 
     public function getDisplaySizeAttribute()

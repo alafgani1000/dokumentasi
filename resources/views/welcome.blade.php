@@ -45,7 +45,7 @@
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             @auth
                                 <li class="nav-item">
-                                    <a href="{{ url('/home') }}" class="nav-link">Home</a>
+                                    <a href="{{ url('/home') }}" class="nav-link text-white bg-primary rounded-2">Home</a>
                                 </li>
                             @else
                                 <li class="nav-item mr-2">
@@ -71,6 +71,7 @@
 
                 <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 sm:text-left">
+                        &copy; Yasunaga Indonesia 2023 &#10084;
                     </div>
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">

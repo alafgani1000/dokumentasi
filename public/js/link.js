@@ -12,79 +12,18 @@ $(function () {
     });
 
     /**
-     * defined modal upload file
-     *
+     * copy file link
      */
-    var createDirModal = new bootstrap.Modal(
-        document.getElementById("mc_file"),
-        {
-            keyboard: false,
-        }
-    );
-
-    /**
-     * defined modal create link
-     *
-     */
-    var createLinkModal = new bootstrap.Modal(
-        document.getElementById("mc_create_link"),
-        {
-            keyboard: false,
-        }
-    );
-
-    /**
-     * show modal upload file
-     *
-     */
-    $(".new-file").on("click", function (event) {
-        createDirModal.show();
+    $(".data-copy").on("click", function (event) {
+        const link = $(this).attr("datalink");
+        navigator.clipboard.writeText(link);
+        Toast.fire({
+            icon: "success",
+            title: "Link berhasil di copy",
+        });
     });
 
-    /**
-     * submit upload file
-     *
-     */
-    $("#form_upload_file").on("submit", function (event) {
-        event.preventDefault();
-        const route = $(this).attr("action");
-        let files = $("#document")[0].files;
-        const csrf = $('[name="_token"]').val();
-        const category = $('[name="category"]').val();
-        if (files.length > 0) {
-            let data = new FormData();
-            data.append("document", files[0]);
-            data.append("_token", csrf);
-            data.append("category", category);
-            $.ajax({
-                type: "POST",
-                url: route,
-                data: data,
-                contentType: false,
-                processData: false,
-            })
-                .done(function (response) {
-                    createDirModal.hide();
-                    Toast.fire({
-                        icon: "success",
-                        title: response.data,
-                    });
-                    location.reload();
-                })
-                .fail(function (response) {
-                    Toast.fire({
-                        icon: "error",
-                        title: "Error",
-                    });
-                });
-        }
-    });
-
-    /**
-     * delete file
-     *
-     */
-    $(".delete-file").on("click", function (event) {
+    $(".delete-link").on("click", function (event) {
         Swal.fire({
             title: "Are you sure?",
             icon: "warning",
@@ -106,6 +45,10 @@ $(function () {
                 })
                     .done(function (res) {
                         location.reload();
+                        Toast.fire({
+                            icon: "success",
+                            title: "Link deleted",
+                        });
                     })
                     .fail(function (res) {
                         Toast.fire({
@@ -117,6 +60,17 @@ $(function () {
             allowOutsideClick: () => !Swal.isLoading(),
         });
     });
+
+    /**
+     * defined modal create link
+     *
+     */
+    var createLinkModal = new bootstrap.Modal(
+        document.getElementById("mc_create_link"),
+        {
+            keyboard: false,
+        }
+    );
 
     /**
      * create file link

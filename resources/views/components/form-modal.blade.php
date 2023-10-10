@@ -13,7 +13,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" form="{{ $idForm }}">Save</button>
+                <button type="submit" class="btn btn-primary" form="{{ $idForm }}">{{$defaultTextButton}}</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

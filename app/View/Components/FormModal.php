@@ -42,17 +42,25 @@ class FormModal extends Component
     public $modalTitle;
 
     /**
+     * default textbutton
+     *
+     * @var string
+     */
+    public $defaultTextButton;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($idModal, $idForm, $action, $method, $modalTitle)
+    public function __construct($idModal, $idForm, $action, $method, $modalTitle, $defaultTextButton = 'Save')
     {
         $this->idModal = $idModal;
         $this->idForm = $idForm;
         $this->action = $action;
         $this->method = $method;
         $this->modalTitle = $modalTitle;
+        $this->defaultTextButton = $defaultTextButton;
     }
 
     /**

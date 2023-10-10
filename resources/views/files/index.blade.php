@@ -37,7 +37,7 @@
                         size="{{ $item->display_size }}"
                         author="{{ $item->display_author }}"
                         createDate="{{ $item->created_at }}"
-                        dataShare="test"
+                        dataShare="{{ route('file.create-link', $item->id) }}"
                         dataDelete="{{ route('file.delete', $item->id) }}"
                     >
                     </x-file-row>
@@ -45,16 +45,42 @@
                 {{ $files->links() }}
             </div>
         </div>
+        {{-- modal upload file --}}
         <x-form-modal
             idModal="mc_file"
             idForm="form_upload_file"
             action="{{ route('file.upload') }}"
             method="POST"
-            modalTitle="Upload File">
-        <label class="form-label">File (* Pdf file only</label>
-        <input type="hidden" name="category", id="category" value="{{ $category->id }}" />
-        <input type="file" class="form-control" name="document" id="document" />
+            modalTitle="Upload File"
+        >
+            <label class="form-label">File (* Pdf file only</label>
+            <input type="hidden" name="category" id="category" value="{{ $category->id }}" />
+            <input type="file" class="form-control" name="document" id="document" />
         </x-form-modal>
+        {{-- end modal upload file --}}
+
+        {{-- modal create link --}}
+        <x-form-modal
+        idModal="mc_create_link"
+        idForm="form_create_link"
+        action=""
+        method="POST"
+        modalTitle="Create Link"
+        defaultTextButton="Generate"
+        >
+            <div>
+                <label class="form-label">Password</label>
+                <input class="form-control" type="password" name="password" />
+            </div>
+            <div class="mt-4">
+                <label class="form-label">Link File</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="url_link" id="url_link">
+                    <button class="btn btn-outline-secondary" type="button" id="btn-copy">Copy</button>
+                </div>
+            </div>
+        </x-form-modal>
+        {{-- end modal create link --}}
     </div>
 @endsection
 @section("script")

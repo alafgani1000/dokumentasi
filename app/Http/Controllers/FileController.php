@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
+use App\Models\FileLink;
 use Illuminate\Support\Facades\Auth;
+use Tools;
 
 class FileController extends Controller
 {
@@ -20,18 +22,11 @@ class FileController extends Controller
         $category = Category::find($id);
         $search = $req->search;
         $files = File::with('user')
+            ->where('user_id', Auth::user()->id)
             ->where('file_name', 'like', '%'.$search.'%')
             ->where('category_id',$id)
             ->paginate(10)->onEachSide(1);
         return view('files.index', compact('category', 'files', 'search'));
-    }
-
-    /**
-     *
-     */
-    public function link()
-    {
-        return view('links.index');
     }
 
     /**
@@ -109,17 +104,39 @@ class FileController extends Controller
     /**
      * create file link
      */
-    public function createLink()
+    public function createLink(Request $req, $id)
     {
-
+        $user = Auth::user()->id;
+        $password = $req->password;
+        $link = Tools::createFileLink($user, $password, $id);
+        return $link;
     }
 
     /**
      * file verification
      * memverifikasi akses file
      */
-    public function accessVerification()
+    public function accessVerification(Request $req)
     {
-
+        if(isset($req->password)) {
+            $signature = $req->signature;
+            $token =  $req->token;
+            $link = FileLink::where('signature', $signature)->where('token', $token)->first();
+            if($link->password == $req->password) {
+                return response()->file(storage_path('app/'.$link->file->name));
+            } else {
+                $message = 'Password salah';
+                return view('links.password', compact('signature','token','message'));
+            }
+        } else {
+            $signature = $req->signature;
+            $token =  $req->token;
+            $link = FileLink::where('signature', $signature)->where('token', $token)->first();
+            if($link->password == '') {
+                return response()->file(storage_path('app/'.$link->file->name));
+            } else {
+                return view('links.password', compact('signature','token'));
+            }
+        }
     }
 }

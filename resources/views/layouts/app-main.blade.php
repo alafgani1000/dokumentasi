@@ -21,7 +21,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img class="mt-0" src="{{ asset('images/doc-logo.png') }}" width="20%" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
                     @auth
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link fw-bold" aria-current="{{ route('home') }}" href=""> <i class="bi bi-house-fill"></i> Home</a>
+                            <a class="nav-link fw-bold" aria-current="apge" href="{{ route('home') }}"> <i class="bi bi-house-fill"></i> Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-bold" aria-current="page" href="{{ route('drive') }}"> <i class="bi bi-hdd-fill"></i> My Drive</a>
@@ -68,7 +68,7 @@
         </main>
         @yield('script')
         <footer class="container mt-2">
-            &copy;Dokumentasi {{ date('Y') }}
+            &copy; Yasunaga Indonesia 2023 &#10084;
         </footer>
     </body>
 </html>

@@ -133,7 +133,7 @@ class Tool
      * @param $userId
      * @return $data
      */
-    public function createFileLink($userId, $password=NULL)
+    public function createFileLink($userId, $password=NULL, $fileId)
     {
         try {
             $code =  $this->generateCode();
@@ -147,7 +147,8 @@ class Tool
                 'url' => $link,
                 'status' => 1,
                 'key' => $key,
-                'password' => $password
+                'password' => $password,
+                'file_id' => $fileId
             ]);
             if ($create) {
                 $data = new stdClass();
