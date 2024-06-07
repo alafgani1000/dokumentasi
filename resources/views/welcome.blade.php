@@ -22,7 +22,7 @@
             }
 
             .pm-color {
-                background-color: #053F5E !important;
+                background-color: #bfcad0 !important;
             }
 
             .logo {
@@ -33,7 +33,7 @@
     <body class="antialiased">
         <div class="relative pm-color flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="navbar navbar-expand-sm bg-white mb-0">
+                <div class="navbar navbar-expand-sm bg-white mb-0 pt-4 pe-2">
                     <div class="container-fluid">
                         {{-- <a class="navbar-brand" href="#">
                             <img src="{{ asset('images/doc-logo.png') }}" width="30%"/>
@@ -49,10 +49,10 @@
                                 </li>
                             @else
                                 <li class="nav-item mr-2">
-                                    <a href="{{ route('login') }}" class="nav-link text-white bg-primary rounded-2"><i class="bi bi-box-arrow-in-right me-1 text-white"></i> Log in</a>
+                                    <a href="{{ route('login') }}" class="nav-link text-white bg-secondary rounded-2"><i class="bi bi-box-arrow-in-right me-1 text-white"></i> Log in</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('register') }}" class="nav-link text-white bg-primary rounded-2"><i class="bi bi-person-plus me-1 text-white"></i>Register</a>
+                                    <a href="{{ route('register') }}" class="nav-link text-white bg-secondary rounded-2"><i class="bi bi-person-plus me-1 text-white"></i>Register</a>
                                 </li>
                             @endauth
                             </ul>
@@ -62,9 +62,8 @@
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg text-center">
                     <div class="text-center pt-5">
                         <a class="navbar-brand" href="#">
-                            <img src="{{ asset('images/doc-logo.png') }}" width="30%"/>
+                            <img src="{{ asset('images/logo-doc.svg') }}" width="40%"/>
                         </a>
-                        <p>Membuat kita lebih baik</p>
                     </div>
                     <img src="{{ asset('images/2827397.jpg') }}" width="50%"/>
                 </div>
