@@ -3,15 +3,17 @@
 @section("content")
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-3 vertical-center">
-            <img class="mb-3" src="{{ asset('images/doc-logo.png') }}" width="70%" />
-            <div class="login p-2">
-                <div class="mt-2 text-white">
-                    <h2 style="font-size: 1rem">Login</h2>
+        <div class="col-lg-3 vertical-center">
+            <div class="text-center">
+                <img class="mb-5" src="{{ asset('images/logo-doc3.svg') }}" width="30%" />
+            </div>
+            <div class="login p-3 bg-light">
+                <div class="mt-2">
+                    <h2 style="font-size: 1.5rem" class="fw-bold">Sign in Here</h2>
                 </div>
-                <div class="col-md-12 p-4 border-top-white">
+                <div class="col-md-12 p-3 border-top-white">
                     @if($errors->count() > 0)
-                        <div class="text-white text-center mb-4">
+                        <div class=" text-center mb-4">
                             {{ $errors->first('not_match') }}
                         </div>
                     @endif
@@ -20,9 +22,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label text-white">Email address</label>
+                                    <label for="email" class="form-label">Email address</label>
                                     <input type="email" name="email" class="form-control" id="email">
-                                    <div class="text-white" id="feedbackEmail">
+                                    <div class="" id="feedbackEmail">
                                         @if($errors->count() > 0)
                                             {{ $errors->first('email') }}
                                         @endif
@@ -33,9 +35,9 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label for="password" class="form-label text-white">Password</label>
+                                    <label for="password" class="form-label">Password</label>
                                     <input type="password" name="password" class="form-control" id="password">
-                                    <div class="text-white" id="feedbackPassword">
+                                    <div class="" id="feedbackPassword">
                                         @if($errors->count() > 0)
                                             {{ $errors->first('password') }}
                                         @endif
@@ -43,10 +45,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col">
                                 <div class="mb-3 d-grid">
-                                    <button class="btn btn-primary text-white">Login</button>
+                                    <button class="btn text-white pt-2 pb-2 fw-bold bg-navy">Login</button>
                                 </div>
                             </div>
                         </div>

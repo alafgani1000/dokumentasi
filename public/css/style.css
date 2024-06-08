@@ -7,7 +7,6 @@ body {
     display: block;
 }
 .login {
-    background-color: #06113c;
     border-radius: 5px 5px 5px 5px;
 }
 .primary-color {
@@ -40,7 +39,6 @@ body {
     font-weight: bolder;
 }
 .register {
-    background-color: #06113c;
     border-radius: 5px 5px 5px 5px;
     padding-top: 10px;
     margin-top: 10px;
@@ -89,4 +87,56 @@ body {
         background-size: cover;
         background-repeat: no-repeat;
     }
+}
+
+.bg-black {
+    background-color: #151515 !important;
+}
+
+.bg-maron {
+    background-color: #a91d3a !important;
+}
+
+.bg-red {
+    background-color: #c73659 !important;
+}
+
+.bg-grey {
+    background-color: #eeeeee !important;
+}
+
+.bg-navy {
+    background-color: #00224d !important;
+}
+
+.bg-red-neon {
+    background-color: #ff204e !important;
+}
+
+.bg-red-maroon {
+    background-color: #5d0e41 !important;
+}
+
+.bg-grey {
+    background-color: #eeeeee;
+}
+
+.text-navy {
+    color: #00224d !important;
+}
+
+.text-red-neon {
+    color: #ff204e !important;
+}
+
+.text-redd {
+    color: #a0153e !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.cursor-pointer:hover {
+    box-shadow: 1px 1px 1px 1px grey;
 }

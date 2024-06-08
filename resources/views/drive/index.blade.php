@@ -7,7 +7,7 @@
                 <h5 class="float-start">My Drive</h5>
                 <div class="float-end">
                     <div class="btn-group shadow-btn float-end">
-                        <button class="btn btn-primary btn-sm new-directory text-white"><i class="bi bi-folder-plus text-white me-1 fw-bold"></i> New</button>
+                        <button class="btn bg-navy btn-sm new-directory text-white"><i class="bi bi-folder-plus text-white me-1 fw-bold"></i> New</button>
                     </div>
 
                     <div class="row g-4 float-end me-1">

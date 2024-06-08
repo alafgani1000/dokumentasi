@@ -35,7 +35,7 @@
                     <i class="bi bi-file-pdf-fill text-danger"></i>
                        {{ Str::substr($item->file->file_name, 0, 30) }}..pdf
                 </div>
-                <div class="col-6 size">{{ Str::substr($item->url,0,70) }} ... &nbsp;<i datalink="{{ $item->url }}" class="bi bi-clipboard me-2 data-copy"></i></div>
+                <div class="col-6 size">{{ Str::substr($item->url,0,70) }} ... &nbsp;<i datalink="{{ $item->url }}" class="bi bi-clipboard me-2 data-copy cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to copy"></i></div>
                 <div class="col-2">{{ $item->password }}</div>
             </div>
             @endforeach
