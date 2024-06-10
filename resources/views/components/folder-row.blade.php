@@ -1,4 +1,4 @@
-<div class="row box-row">
+<div class="row box-row fs-6">
     <div class="col-3 name-file">
         <i class="bi bi-three-dots me-2" data-bs-toggle="dropdown"></i>
         <ul class="dropdown-menu box-button">

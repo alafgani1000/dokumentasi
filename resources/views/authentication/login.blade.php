@@ -7,7 +7,7 @@
             <div class="text-center">
                 <img class="mb-5" src="{{ asset('images/logo-doc3.svg') }}" width="30%" />
             </div>
-            <div class="login p-3 bg-light">
+            <div class="login ps-3 pe-3 pb-3 pt-2 bg-light">
                 <div class="mt-2">
                     <h2 style="font-size: 1.5rem" class="fw-bold">Sign in Here</h2>
                 </div>
@@ -50,6 +50,11 @@
                                 <div class="mb-3 d-grid">
                                     <button class="btn text-white pt-2 pb-2 fw-bold bg-navy">Login</button>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 text-center">
+                            <div class="col">
+                               Don't have an account? <a href="{{ route('register') }}"  class="text-primary">Register Now</a>
                             </div>
                         </div>
                     </form>

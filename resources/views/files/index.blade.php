@@ -7,7 +7,7 @@
                 <h5 class="float-start"><i class="bi bi-folder-fill text-primary me-2"></i>{{ $category->name }}</h5>
                 <div class="float-end">
                     <div class="btn-group shadow-btn float-end">
-                        <button class="btn btn-primary btn-sm new-file fw-bold"><i class="bi bi-upload fw-bold me-1"></i></i> Upload</button>
+                        <button class="btn bg-navy btn-sm new-file fw-bold"><i class="bi bi-upload fw-bold me-1"></i></i> Upload</button>
                     </div>
 
                     <div class="row g-4 float-end me-1">
